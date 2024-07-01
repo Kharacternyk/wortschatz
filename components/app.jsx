@@ -4,11 +4,13 @@ import {
   Radio,
   RadioGroup,
   Stack,
+  SvgIcon,
   ThemeProvider,
   Typography,
   createTheme,
 } from "@mui/material";
 import {StrictMode, useState} from "react";
+import Logo from "../images/logo.svg?react";
 
 export const App = () => {
   const [article, setArticle] = useState("die");
@@ -19,6 +21,7 @@ export const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Stack gap={2} px={2} py={2} alignItems="center">
+          <SvgIcon inheritViewBox component={Logo} />
           <Typography>
             Wie heißt
             <span lang="en-us"> apple </span>
