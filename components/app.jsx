@@ -1,38 +1,43 @@
 import {
-  ChakraProvider,
+  CssBaseline,
+  FormControlLabel,
   Radio,
   RadioGroup,
-  Stack,
-  extendTheme,
-  withDefaultColorScheme,
-} from "@chakra-ui/react";
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
 import {StrictMode, useState} from "react";
 
 export const App = () => {
   const [article, setArticle] = useState("die");
+  const onArticleChange = (event) => setArticle(event.target.value);
 
   return (
     <StrictMode>
-      <ChakraProvider theme={theme}>
-        <RadioGroup value={article} onChange={setArticle}>
-          <Stack>
-            <Radio value="der">der</Radio>
-            <Radio value="die">die</Radio>
-            <Radio value="das">das</Radio>
-          </Stack>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <RadioGroup row value={article} onChange={onArticleChange}>
+          {["der", "die", "das"].map(makeRadio)}
         </RadioGroup>
-      </ChakraProvider>
+      </ThemeProvider>
     </StrictMode>
   );
 };
 
-const theme = extendTheme(
-  {
-    config: {
-      initialColorMode: "dark",
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#f26225",
+    },
+    secondary: {
+      main: "#d32036",
     },
   },
-  withDefaultColorScheme({
-    colorScheme: "orange",
-  })
+});
+
+const makeRadio = (value) => (
+  <FormControlLabel value={value} control={radio} label={value} />
 );
+
+const radio = <Radio />;
