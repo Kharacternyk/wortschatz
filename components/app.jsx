@@ -24,7 +24,9 @@ export const App = () => {
           <SvgIcon inheritViewBox component={Logo} />
           <Typography>
             Wie heißt
-            <span lang="en-us"> apple </span>
+            <Typography color="primary" component="span">
+              <span lang="en-us"> apple </span>
+            </Typography>
             auf Deutsch?
           </Typography>
           <RadioGroup row value={article} onChange={makeListener(setArticle)}>
