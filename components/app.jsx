@@ -30,10 +30,10 @@ export const App = () => {
             auf Deutsch?
           </Typography>
           <RadioGroup row value={article} onChange={makeListener(setArticle)}>
-            {["der", "die", "das"].map(makeRadio)}
+            {["der", "die", "das"].map(makeRadio(article))}
           </RadioGroup>
           <RadioGroup row value={word} onChange={makeListener(setWord)}>
-            {["Apfel", "Geschirrreiniger", "Kühlschrank"].map(makeRadio)}
+            {["Apfel", "Geschirrreiniger", "Kühlschrank"].map(makeRadio(word))}
           </RadioGroup>
         </Stack>
       </ThemeProvider>
@@ -53,9 +53,23 @@ const theme = createTheme({
   },
 });
 
-const makeRadio = (value) => (
-  <FormControlLabel value={value} control={radio} label={value} />
-);
+const makeRadio = (selectedValue) => (value) => {
+  const label =
+    value == selectedValue ? (
+      <Typography color="primary">{value}</Typography>
+    ) : (
+      value
+    );
+
+  return (
+    <FormControlLabel
+      value={value}
+      control={radio}
+      label={label}
+      disableTypography
+    />
+  );
+};
 
 const radio = <Radio />;
 
