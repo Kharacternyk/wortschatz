@@ -45,10 +45,13 @@ const theme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#f26225",
+      main: "#ec872c",
     },
     secondary: {
-      main: "#d32036",
+      main: "#cc5b02",
+    },
+    background: {
+      default: "#641d01",
     },
   },
 });
