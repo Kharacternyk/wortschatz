@@ -66,6 +66,7 @@ const makeRadio = (selectedValue) => (value) => {
 
   return (
     <FormControlLabel
+      key={value}
       value={value}
       control={radio}
       label={label}
