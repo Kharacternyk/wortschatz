@@ -3,7 +3,7 @@ import {
   Stack,
   SvgIcon,
   ThemeProvider,
-  createTheme
+  createTheme,
 } from "@mui/material";
 import {StrictMode} from "react";
 import Logo from "../images/logo.svg?react";
