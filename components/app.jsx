@@ -21,7 +21,7 @@ export const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Stack gap={2} px={2} py={2} alignItems="center">
-          <SvgIcon inheritViewBox component={Logo} />
+          <SvgIcon inheritViewBox component={Logo} sx={logoStyle} />
           <Typography>
             Wie heißt
             <Typography color="primary" component="span">
@@ -55,6 +55,11 @@ const theme = createTheme({
     },
   },
 });
+
+const logoStyle = {
+  height: 64,
+  width: 64,
+};
 
 const makeRadio = (selectedValue) => (value) => {
   const label =
