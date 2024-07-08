@@ -26,7 +26,11 @@ export const Form = () => {
       const [english, german, germanPlural] = line.split("\t");
       const [germanArticle, germanNoun] = german.split(" ", 2);
 
-      nouns.push({ english, germanArticle, germanNoun });
+      nouns.push({
+        english: english.toLowerCase(),
+        germanArticle: germanArticle.toLowerCase(),
+        germanNoun,
+      });
     }
 
     setNouns(nouns);
@@ -86,7 +90,7 @@ export const Form = () => {
   );
 };
 
-const articles = ["Der", "Die", "Das"];
+const articles = ["der", "die", "das"];
 
 const makeRadio = (selectedIndex) => (text, index) => {
   const label =
