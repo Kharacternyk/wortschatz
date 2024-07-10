@@ -80,10 +80,12 @@ export const Form = () => {
         value={articleIndex}
         onChange={makeListener(setArticleIndex)}
       >
-        {articles.map(makeRadio(articleIndex, articleIcons))}
+        {articles.map(makeArticleRadio(articleIndex))}
       </RadioGroup>
       <RadioGroup row value={nounIndex} onChange={makeListener(setNounIndex)}>
-        {nouns.map((noun) => noun.germanNoun).map(makeRadio(nounIndex))}
+        {nouns
+          .map((noun) => `${articles[articleIndex]} ${noun.germanNoun}`)
+          .map(makeNounRadio(nounIndex))}
       </RadioGroup>
       <Button variant={buttonVariant} onClick={toggleVerified}>
         {buttonText}
@@ -94,7 +96,8 @@ export const Form = () => {
 };
 
 const makeRadio =
-  (selectedIndex, icons = null) =>
+  (icons = null) =>
+  (selectedIndex) =>
   (text, index) => {
     const color = selectedIndex == index ? "primary" : "default";
     const icon = icons != null ? icons[index] : null;
@@ -106,13 +109,20 @@ const makeRadio =
         value={index}
         control={radio}
         label={label}
+        disableTypography
       />
     );
   };
 
-const articles = ["der", "die", "das"];
+const makeArticleRadio = makeRadio([
+  <NightsStay />,
+  <WbSunny />,
+  <PedalBike />,
+]);
 
-const articleIcons = [<NightsStay />, <WbSunny />, <PedalBike />];
+const makeNounRadio = makeRadio();
+
+const articles = ["der", "die", "das"];
 
 const radio = <Radio />;
 
