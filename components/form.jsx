@@ -1,6 +1,9 @@
+import {NightsStay, PedalBike, WbSunny} from "@mui/icons-material";
 import {
   Alert,
+  Avatar,
   Button,
+  Chip,
   CircularProgress,
   FormControlLabel,
   Radio,
@@ -66,10 +69,10 @@ export const Form = () => {
   return (
     <>
       <Typography>
-        Wie heißt
-        <Typography color="primary" component="span">
-          <span lang="en-us"> {nouns[correctNounIndex].english} </span>
-        </Typography>
+        Wie heißt{" "}
+        <span lang="en-us">
+          <Chip avatar={flag} label={nouns[correctNounIndex].english}></Chip>
+        </span>{" "}
         auf Deutsch?
       </Typography>
       <RadioGroup
@@ -77,7 +80,7 @@ export const Form = () => {
         value={articleIndex}
         onChange={makeListener(setArticleIndex)}
       >
-        {articles.map(makeRadio(articleIndex))}
+        {articles.map(makeRadio(articleIndex, articleIcons))}
       </RadioGroup>
       <RadioGroup row value={nounIndex} onChange={makeListener(setNounIndex)}>
         {nouns.map((noun) => noun.germanNoun).map(makeRadio(nounIndex))}
@@ -90,27 +93,29 @@ export const Form = () => {
   );
 };
 
+const makeRadio =
+  (selectedIndex, icons = null) =>
+  (text, index) => {
+    const color = selectedIndex == index ? "primary" : "default";
+    const icon = icons != null ? icons[index] : null;
+    const label = <Chip color={color} label={text} icon={icon} />;
+
+    return (
+      <FormControlLabel
+        key={index}
+        value={index}
+        control={radio}
+        label={label}
+      />
+    );
+  };
+
 const articles = ["der", "die", "das"];
 
-const makeRadio = (selectedIndex) => (text, index) => {
-  const label =
-    index == selectedIndex ? (
-      <Typography color="primary">{text}</Typography>
-    ) : (
-      text
-    );
-
-  return (
-    <FormControlLabel
-      key={index}
-      value={index}
-      control={radio}
-      label={label}
-      disableTypography
-    />
-  );
-};
+const articleIcons = [<NightsStay />, <WbSunny />, <PedalBike />];
 
 const radio = <Radio />;
+
+const flag = <Avatar>🇺🇸</Avatar>;
 
 const makeListener = (setter) => (event) => setter(event.target.value);

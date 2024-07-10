@@ -1,5 +1,6 @@
 import {
   CssBaseline,
+  Paper,
   Stack,
   SvgIcon,
   ThemeProvider,
@@ -14,10 +15,12 @@ export const App = () => {
     <StrictMode>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Stack gap={2} px={2} py={2} alignItems="center">
-          <SvgIcon inheritViewBox component={Logo} sx={logoStyle} />
-          <Form />
-        </Stack>
+        <Paper sx={paperStyle}>
+          <Stack gap={2} px={2} py={2} alignItems="center">
+            <SvgIcon inheritViewBox component={Logo} sx={logoStyle} />
+            <Form />
+          </Stack>
+        </Paper>
       </ThemeProvider>
     </StrictMode>
   );
@@ -26,17 +29,12 @@ export const App = () => {
 const theme = createTheme({
   palette: {
     mode: "dark",
-    primary: {
-      main: "#ec872c",
-    },
-    secondary: {
-      main: "#cc5b02",
-    },
-    background: {
-      default: "#33015f",
-    },
   },
 });
+
+const paperStyle = {
+  m: 2,
+};
 
 const logoStyle = {
   height: 64,
