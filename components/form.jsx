@@ -62,7 +62,9 @@ export const Form = () => {
     articleIndex == articles.indexOf(germanArticle) &&
     nounIndex == correctNounIndex
       ? ["Richtig!", "success"]
-      : [`Nein, das sollte ${germanArticle} ${germanNoun} sein`, "error"];
+      : nounIndex == correctNounIndex
+      ? [`Fast so, es heißt ${germanArticle} ${germanNoun}`, "warning"]
+      : [`Nein, es heißt ${germanArticle} ${germanNoun}`, "error"];
   const answerAlert = isVerified ? (
     <Alert severity={answerSeverity}>{answerText}</Alert>
   ) : null;
