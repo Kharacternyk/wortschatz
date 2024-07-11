@@ -7,7 +7,7 @@ export const onRequestGet = async (context) => {
   const readPromises = [];
   const keys = [];
 
-  for (let index = 0; index < 3; ++index) {
+  for (let index = 0; index < 4; ++index) {
     let key = Math.floor(Math.random() * (length - index));
 
     for (const otherKey of keys) {

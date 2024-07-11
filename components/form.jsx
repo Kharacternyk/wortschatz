@@ -37,7 +37,7 @@ export const Form = () => {
     }
 
     setNouns(nouns);
-    setCorrectNounIndex(Math.floor(Math.random() * 3));
+    setCorrectNounIndex(Math.floor(Math.random() * nouns.length));
   };
 
   useEffect(() => {
