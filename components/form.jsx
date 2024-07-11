@@ -85,9 +85,7 @@ export const Form = () => {
         {articles.map(makeArticleRadio(articleIndex))}
       </RadioGroup>
       <RadioGroup row value={nounIndex} onChange={makeListener(setNounIndex)}>
-        {nouns
-          .map((noun) => `${articles[articleIndex]} ${noun.germanNoun}`)
-          .map(makeNounRadio(nounIndex))}
+        {nouns.map((noun) => noun.germanNoun).map(makeNounRadio(nounIndex))}
       </RadioGroup>
       <Button variant={buttonVariant} onClick={toggleVerified}>
         {buttonText}
