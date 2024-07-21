@@ -26,7 +26,16 @@ export const onRequestGet = async (context) => {
     );
   }
 
-  const readRecords = await Promise.all(readPromises);
+  const records = await Promise.all(readPromises);
+  const chosenIndex = Math.floor(Math.random() * records.length);
+  const chosenRecord = records[chosenIndex];
+  const [chosenEnglishNoun, chosenGermanArticle, ..._] =
+    chosenRecord.split("\t");
+  const responseFields = [chosenEnglishNoun, chosenGermanArticle, chosenIndex];
 
-  return new Response(readRecords.join("\n"));
+  for (const record of records) {
+    responseFields.push(record.split("\t")[2]);
+  }
+
+  return new Response(responseFields.join("\t"));
 };

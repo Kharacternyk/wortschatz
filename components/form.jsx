@@ -19,13 +19,15 @@ export const Form = () => {
   const [nounIndex, setNounIndex] = useState(1);
   const [iterationCount, setIterationCount] = useState(0);
   const [isVerified, setIsVerified] = useState(false);
-  const [nouns, correctNounIndex] = usePrefetch("/nouns", parseNouns, [
-    iterationCount,
-  ]);
+  const quiz = usePrefetch("/nouns", [iterationCount]);
 
-  if (nouns === null) {
+  if (quiz === null) {
     return <CircularProgress />;
   }
+
+  const [englishNoun, correctArticle, correctNounIndex, ...germanNouns] =
+    quiz.split("\t");
+  const correctNoun = germanNouns[correctNounIndex];
 
   const toggleVerified = () => {
     if (isVerified) {
@@ -36,14 +38,13 @@ export const Form = () => {
   const [buttonText, buttonVariant] = isVerified
     ? ["Noch ein Mal", "text"]
     : ["Prüfen", "contained"];
-  const { englishNoun, germanArticle, germanNoun } = nouns[correctNounIndex];
   const [answerText, answerSeverity] =
-    articleIndex == articles.indexOf(germanArticle) &&
+    articleIndex == articles.indexOf(correctArticle) &&
     nounIndex == correctNounIndex
       ? ["Richtig!", "success"]
       : nounIndex == correctNounIndex
-      ? [`Fast so, es heißt ${germanArticle} ${germanNoun}`, "warning"]
-      : [`Nein, es heißt ${germanArticle} ${germanNoun}`, "error"];
+      ? [`Fast so, es heißt ${correctArticle} ${correctNoun}`, "warning"]
+      : [`Nein, es heißt ${correctArticle} ${correctNoun}`, "error"];
   const answerAlert = isVerified ? (
     <Alert severity={answerSeverity}>{answerText}</Alert>
   ) : null;
@@ -68,7 +69,7 @@ export const Form = () => {
         {articles.map(makeArticleRadio(articleIndex))}
       </RadioGroup>
       <RadioGroup row value={nounIndex} onChange={makeListener(setNounIndex)}>
-        {nouns.map((noun) => noun.germanNoun).map(makeNounRadio(nounIndex))}
+        {germanNouns.map(makeNounRadio(nounIndex))}
       </RadioGroup>
       <Button variant={buttonVariant} onClick={toggleVerified}>
         {buttonText}
@@ -76,28 +77,6 @@ export const Form = () => {
       {answerAlert}
     </>
   );
-};
-
-const parseNouns = (text) => {
-  if (text === null) {
-    return [null, null];
-  }
-
-  const lines = text.split("\n");
-  const nouns = [];
-
-  for (const line of lines) {
-    const [englishNoun, german, germanPlural] = line.split("\t");
-    const [germanArticle, germanNoun] = german.split(" ", 2);
-
-    nouns.push({
-      englishNoun: englishNoun.toLowerCase(),
-      germanArticle: germanArticle.toLowerCase(),
-      germanNoun,
-    });
-  }
-
-  return [nouns, Math.floor(Math.random() * nouns.length)];
 };
 
 const makeRadio =

@@ -1,14 +1,12 @@
 import {useEffect, useState} from "react";
 import {useLocalStorage} from "./local-storage.js";
 
-export const usePrefetch = (url, factory, dependencies) => {
+export const usePrefetch = (url, dependencies) => {
   const [cachedResponse, setCachedResponse] = useLocalStorage(url);
-  const [response, setResponse] = useState(factory(cachedResponse));
+  const [response, setResponse] = useState(cachedResponse);
 
   const cacheNextResponse = async () => {
-    setResponse(
-      factory(response === null ? await getText(url) : cachedResponse)
-    );
+    setResponse(response === null ? await getText(url) : cachedResponse);
     setCachedResponse(await getText(url));
   };
 
