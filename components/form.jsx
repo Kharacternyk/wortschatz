@@ -6,6 +6,7 @@ import {
   Chip,
   CircularProgress,
   FormControlLabel,
+  Link,
   Radio,
   RadioGroup,
   Typography,
@@ -26,11 +27,11 @@ export const Form = () => {
     const nouns = [];
 
     for (const line of lines) {
-      const [english, german, germanPlural] = line.split("\t");
+      const [englishNoun, german, germanPlural] = line.split("\t");
       const [germanArticle, germanNoun] = german.split(" ", 2);
 
       nouns.push({
-        english: english.toLowerCase(),
+        englishNoun: englishNoun.toLowerCase(),
         germanArticle: germanArticle.toLowerCase(),
         germanNoun,
       });
@@ -57,7 +58,7 @@ export const Form = () => {
   const [buttonText, buttonVariant] = isVerified
     ? ["Noch ein Mal", "text"]
     : ["Prüfen", "contained"];
-  const { germanArticle, germanNoun } = nouns[correctNounIndex];
+  const { englishNoun, germanArticle, germanNoun } = nouns[correctNounIndex];
   const [answerText, answerSeverity] =
     articleIndex == articles.indexOf(germanArticle) &&
     nounIndex == correctNounIndex
@@ -73,7 +74,11 @@ export const Form = () => {
       <Typography>
         Wie heißt{" "}
         <span lang="en-us">
-          <Chip avatar={flag} label={nouns[correctNounIndex].english}></Chip>
+          <Link
+            href={`https://www.merriam-webster.com/dictionary/${englishNoun}`}
+          >
+            <Chip avatar={flag} label={englishNoun}></Chip>
+          </Link>
         </span>{" "}
         auf Deutsch?
       </Typography>
