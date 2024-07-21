@@ -1,15 +1,14 @@
 import {
   CssBaseline,
-  Link,
   Paper,
   Stack,
   SvgIcon,
   ThemeProvider,
-  Typography,
   createTheme,
 } from "@mui/material";
 import {StrictMode} from "react";
 import Logo from "../images/logo.svg?react";
+import {Footer} from "./footer.jsx";
 import {Form} from "./form.jsx";
 
 export const App = () => {
@@ -18,7 +17,6 @@ export const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Stack
-          gap={1}
           p={2}
           alignItems="stretch"
           height="100vh"
@@ -30,17 +28,7 @@ export const App = () => {
               <Form />
             </Stack>
           </Paper>
-          <Typography align="center" variant="caption">
-            ©{" "}
-            <Link underline="hover" href="https://vinnich.uk">
-              https://vinnich.uk
-            </Link>{" "}
-            (diese Seite) <br />©{" "}
-            <Link underline="hover" href="https://frequencylists.blogspot.com/">
-              https://frequencylists.blogspot.com/
-            </Link>{" "}
-            (die Wörter)
-          </Typography>
+          <Footer />
         </Stack>
       </ThemeProvider>
     </StrictMode>
