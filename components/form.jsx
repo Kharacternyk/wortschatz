@@ -11,39 +11,17 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import {useEffect, useState} from "react";
+import {useState} from "react";
+import {usePrefetch} from "../hooks/prefetch.js";
 
 export const Form = () => {
   const [articleIndex, setArticleIndex] = useState(1);
   const [nounIndex, setNounIndex] = useState(1);
-  const [nouns, setNouns] = useState(null);
-  const [correctNounIndex, setCorrectNounIndex] = useState(null);
   const [iterationCount, setIterationCount] = useState(0);
   const [isVerified, setIsVerified] = useState(false);
-  const fetchNouns = async () => {
-    const response = await fetch("/nouns");
-    const text = await response.text();
-    const lines = text.split("\n");
-    const nouns = [];
-
-    for (const line of lines) {
-      const [englishNoun, german, germanPlural] = line.split("\t");
-      const [germanArticle, germanNoun] = german.split(" ", 2);
-
-      nouns.push({
-        englishNoun: englishNoun.toLowerCase(),
-        germanArticle: germanArticle.toLowerCase(),
-        germanNoun,
-      });
-    }
-
-    setNouns(nouns);
-    setCorrectNounIndex(Math.floor(Math.random() * nouns.length));
-  };
-
-  useEffect(() => {
-    fetchNouns();
-  }, [iterationCount]);
+  const [nouns, correctNounIndex] = usePrefetch("/nouns", parseNouns, [
+    iterationCount,
+  ]);
 
   if (nouns === null) {
     return <CircularProgress />;
@@ -98,6 +76,28 @@ export const Form = () => {
       {answerAlert}
     </>
   );
+};
+
+const parseNouns = (text) => {
+  if (text === null) {
+    return [null, null];
+  }
+
+  const lines = text.split("\n");
+  const nouns = [];
+
+  for (const line of lines) {
+    const [englishNoun, german, germanPlural] = line.split("\t");
+    const [germanArticle, germanNoun] = german.split(" ", 2);
+
+    nouns.push({
+      englishNoun: englishNoun.toLowerCase(),
+      germanArticle: germanArticle.toLowerCase(),
+      germanNoun,
+    });
+  }
+
+  return [nouns, Math.floor(Math.random() * nouns.length)];
 };
 
 const makeRadio =
