@@ -29,7 +29,6 @@ export const onRequestGet = async (context) => {
   const records = await Promise.all(readPromises);
   const chosenIndex = Math.floor(Math.random() * records.length);
   const chosenRecord = records[chosenIndex];
-  console.log({ records, chosenRecord, chosenIndex });
   const [chosenEnglishNoun, chosenGermanArticle, ..._] =
     chosenRecord.split("\t");
   const responseFields = [chosenEnglishNoun, chosenGermanArticle, chosenIndex];
