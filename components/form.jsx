@@ -62,13 +62,19 @@ export const Form = () => {
         auf Deutsch?
       </Typography>
       <RadioGroup
+        sx={radioGroupStyle}
         row
         value={articleIndex}
         onChange={makeListener(setArticleIndex)}
       >
         {articles.map(makeArticleRadio(articleIndex))}
       </RadioGroup>
-      <RadioGroup row value={nounIndex} onChange={makeListener(setNounIndex)}>
+      <RadioGroup
+        sx={radioGroupStyle}
+        row
+        value={nounIndex}
+        onChange={makeListener(setNounIndex)}
+      >
         {germanNouns.map(makeNounRadio(nounIndex))}
       </RadioGroup>
       <Button variant={buttonVariant} onClick={toggleVerified}>
@@ -105,6 +111,10 @@ const makeArticleRadio = makeRadio([
 ]);
 
 const makeNounRadio = makeRadio();
+
+const radioGroupStyle = {
+  justifyContent: "center",
+};
 
 const articles = ["der", "die", "das"];
 
