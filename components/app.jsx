@@ -19,7 +19,7 @@ export const App = () => {
         <Stack
           p={2}
           alignItems="stretch"
-          height="100vh"
+          height={["100vh", "100svh"]}
           justifyContent="space-between"
         >
           <Paper>
