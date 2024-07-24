@@ -9,6 +9,7 @@ import {
   Link,
   Radio,
   RadioGroup,
+  Stack,
   Typography,
 } from "@mui/material";
 import {useState} from "react";
@@ -61,22 +62,17 @@ export const Form = () => {
         </span>{" "}
         auf Deutsch?
       </Typography>
-      <RadioGroup
-        sx={radioGroupStyle}
-        row
-        value={articleIndex}
-        onChange={makeListener(setArticleIndex)}
-      >
-        {articles.map(makeArticleRadio(articleIndex))}
-      </RadioGroup>
-      <RadioGroup
-        sx={radioGroupStyle}
-        row
-        value={nounIndex}
-        onChange={makeListener(setNounIndex)}
-      >
-        {germanNouns.map(makeNounRadio(nounIndex))}
-      </RadioGroup>
+      <Stack direction="row" flexWrap="wrap" alignItems="center">
+        <RadioGroup
+          value={articleIndex}
+          onChange={makeListener(setArticleIndex)}
+        >
+          {articles.map(makeArticleRadio(articleIndex))}
+        </RadioGroup>
+        <RadioGroup value={nounIndex} onChange={makeListener(setNounIndex)}>
+          {germanNouns.map(makeNounRadio(nounIndex))}
+        </RadioGroup>
+      </Stack>
       <Button variant={buttonVariant} onClick={toggleVerified}>
         {buttonText}
       </Button>
@@ -107,10 +103,6 @@ const makeRadio =
 const makeArticleRadio = makeRadio([<Cake />, <WbSunny />, <PedalBike />]);
 
 const makeNounRadio = makeRadio();
-
-const radioGroupStyle = {
-  justifyContent: "center",
-};
 
 const articles = ["der", "die", "das"];
 
