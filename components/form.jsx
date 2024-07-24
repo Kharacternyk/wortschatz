@@ -1,4 +1,4 @@
-import {NightsStay, PedalBike, WbSunny} from "@mui/icons-material";
+import {Cake, PedalBike, WbSunny} from "@mui/icons-material";
 import {
   Alert,
   Avatar,
@@ -104,11 +104,7 @@ const makeRadio =
     );
   };
 
-const makeArticleRadio = makeRadio([
-  <NightsStay />,
-  <WbSunny />,
-  <PedalBike />,
-]);
+const makeArticleRadio = makeRadio([<Cake />, <WbSunny />, <PedalBike />]);
 
 const makeNounRadio = makeRadio();
 
