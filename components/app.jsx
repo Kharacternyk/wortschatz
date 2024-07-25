@@ -16,19 +16,16 @@ export const App = () => {
     <StrictMode>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Stack
-          p={2}
-          alignItems="stretch"
-          height={["100vh", "100dvh"]}
-          justifyContent="space-between"
-        >
+        <Stack gap={2} p={2} alignItems="stretch">
           <Paper>
             <Stack gap={2} p={2} alignItems="center">
               <SvgIcon inheritViewBox component={Logo} sx={logoStyle} />
               <Form />
             </Stack>
           </Paper>
-          <Footer />
+          <Stack gap={2} alignItems="center">
+            <Footer />
+          </Stack>
         </Stack>
       </ThemeProvider>
     </StrictMode>

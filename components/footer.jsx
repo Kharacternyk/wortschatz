@@ -1,5 +1,5 @@
 import {ExpandLess, ExpandMore} from "@mui/icons-material";
-import {IconButton, Link, Stack, Typography} from "@mui/material";
+import {Fab, Link, Typography} from "@mui/material";
 import {useLocalStorage} from "../hooks/local-storage";
 
 export const Footer = () => {
@@ -7,31 +7,31 @@ export const Footer = () => {
 
   if (footerState === footerStates.collapsed) {
     return (
-      <IconButton
-        sx={buttonStyle}
+      <Fab
+        size="small"
         aria-label="mehr zeigen"
         onClick={() => setFooterState(footerStates.expanded)}
       >
-        <ExpandLess />
-      </IconButton>
+        <ExpandMore />
+      </Fab>
     );
   }
 
   return (
-    <Stack>
-      <IconButton
-        sx={buttonStyle}
+    <>
+      <Fab
+        size="small"
         aria-label="weniger zeigen"
         onClick={() => setFooterState(footerStates.collapsed)}
       >
-        <ExpandMore />
-      </IconButton>
+        <ExpandLess />
+      </Fab>
       <Typography align="center" variant="caption">
         © <FooterLink url="https://vinnich.uk" /> (diese Seite)
         <br />
         © <FooterLink url="https://frequencylists.blogspot.com/" /> (die Wörter)
       </Typography>
-    </Stack>
+    </>
   );
 };
 
@@ -40,10 +40,6 @@ const FooterLink = ({ url }) => (
     {url}
   </Link>
 );
-
-const buttonStyle = {
-  alignSelf: "center",
-};
 
 const footerStates = {
   expanded: "expanded",
