@@ -6,7 +6,11 @@ export const Prompt = memo(({ noun }) => {
     <Typography component="div">
       Wie heißt{" "}
       <span lang="en-us">
-        <Link href={`https://www.merriam-webster.com/dictionary/${noun}`}>
+        <Link
+          href={`https://www.merriam-webster.com/dictionary/${noun}`}
+          target="_blank"
+          rel="noopener"
+        >
           <Chip avatar={flag} label={noun}></Chip>
         </Link>
       </span>{" "}
