@@ -1,19 +1,17 @@
 import {Cake, PedalBike, WbSunny} from "@mui/icons-material";
 import {
   Alert,
-  Avatar,
   Button,
   Chip,
   CircularProgress,
   FormControlLabel,
-  Link,
   Radio,
   RadioGroup,
-  Stack,
-  Typography,
+  Stack
 } from "@mui/material";
 import {useState} from "react";
 import {usePrefetch} from "../hooks/prefetch.js";
+import {Prompt} from "./prompt.jsx";
 
 export const Form = () => {
   const [articleIndex, setArticleIndex] = useState(1);
@@ -51,17 +49,7 @@ export const Form = () => {
   ) : null;
   return (
     <>
-      <Typography>
-        Wie heißt{" "}
-        <span lang="en-us">
-          <Link
-            href={`https://www.merriam-webster.com/dictionary/${englishNoun}`}
-          >
-            <Chip avatar={flag} label={englishNoun}></Chip>
-          </Link>
-        </span>{" "}
-        auf Deutsch?
-      </Typography>
+      <Prompt noun={englishNoun} />
       <Stack direction="row" flexWrap="wrap" alignItems="center">
         <RadioGroup
           value={articleIndex}
@@ -107,7 +95,5 @@ const makeNounRadio = makeRadio();
 const articles = ["der", "die", "das"];
 
 const radio = <Radio />;
-
-const flag = <Avatar>🇺🇸</Avatar>;
 
 const makeListener = (setter) => (event) => setter(event.target.value);
