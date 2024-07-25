@@ -3,7 +3,7 @@ import {memo} from "react";
 
 export const Prompt = memo(({ noun }) => {
   return (
-    <Typography>
+    <Typography component="div">
       Wie heißt{" "}
       <span lang="en-us">
         <Link href={`https://www.merriam-webster.com/dictionary/${noun}`}>
