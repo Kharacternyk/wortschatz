@@ -42,7 +42,7 @@ export const Footer = () => {
     <AppBar sx={appBarStyle}>
       <Toolbar variant="dense">
         <Typography variant="caption" sx={spacerStyle}>
-          © <FooterLink url="https://vinnich.uk" /> (diese Seite)
+          © <FooterLink url="https://vinnich.uk" /> (diese Seite, manche Wörter)
           <br />
           © <FooterLink url="https://frequencylists.blogspot.com/" /> (die
           Wörter)
