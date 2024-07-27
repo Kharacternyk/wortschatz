@@ -10,6 +10,7 @@ export const Prompt = memo(({ noun }) => {
           href={`https://www.merriam-webster.com/dictionary/${noun}`}
           target="_blank"
           rel="noopener"
+          tabindex={-1}
         >
           <Chip avatar={flag} label={noun}></Chip>
         </Link>
