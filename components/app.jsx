@@ -18,7 +18,7 @@ export const App = () => {
     <StrictMode>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Paper>
+        <Paper elevation={4}>
           <Stack gap={2} p={2} alignItems="center">
             <SvgIcon inheritViewBox component={Logo} sx={logoStyle} />
             <Form />
