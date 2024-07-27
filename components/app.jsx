@@ -1,12 +1,10 @@
 import {
-  AppBar,
   CssBaseline,
   Paper,
   Stack,
   SvgIcon,
   ThemeProvider,
-  Toolbar,
-  createTheme,
+  createTheme
 } from "@mui/material";
 import {StrictMode} from "react";
 import Logo from "../images/logo.svg?react";
@@ -24,11 +22,7 @@ export const App = () => {
             <Form />
           </Stack>
         </Paper>
-        <AppBar position="fixed" sx={appBarStyle}>
-          <Toolbar variant="dense">
-            <Footer />
-          </Toolbar>
-        </AppBar>
+        <Footer />
       </ThemeProvider>
     </StrictMode>
   );
@@ -43,9 +37,4 @@ const theme = createTheme({
 const logoStyle = {
   height: 64,
   width: 64,
-};
-
-const appBarStyle = {
-  bottom: 0,
-  top: "auto",
 };
