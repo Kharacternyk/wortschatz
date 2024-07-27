@@ -73,8 +73,8 @@ const makeRadio =
   (icons = null) =>
   (selectedIndex) =>
   (text, index) => {
-    const color = selectedIndex == index ? "primary" : "default";
-    const icon = icons != null ? icons[index] : null;
+    const color = selectedIndex === index ? "primary" : "default";
+    const icon = icons !== null ? icons[index] : null;
     const label = <Chip color={color} label={text} icon={icon} />;
 
     return (
