@@ -1,9 +1,11 @@
 import {
+  AppBar,
   CssBaseline,
   Paper,
   Stack,
   SvgIcon,
   ThemeProvider,
+  Toolbar,
   createTheme,
 } from "@mui/material";
 import {StrictMode} from "react";
@@ -16,17 +18,17 @@ export const App = () => {
     <StrictMode>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Stack gap={2} p={2} alignItems="stretch">
-          <Paper>
-            <Stack gap={2} p={2} alignItems="center">
-              <SvgIcon inheritViewBox component={Logo} sx={logoStyle} />
-              <Form />
-            </Stack>
-          </Paper>
-          <Stack gap={2} alignItems="center">
-            <Footer />
+        <Paper>
+          <Stack gap={2} p={2} alignItems="center">
+            <SvgIcon inheritViewBox component={Logo} sx={logoStyle} />
+            <Form />
           </Stack>
-        </Stack>
+        </Paper>
+        <AppBar position="fixed" sx={appBarStyle}>
+          <Toolbar variant="dense">
+            <Footer />
+          </Toolbar>
+        </AppBar>
       </ThemeProvider>
     </StrictMode>
   );
@@ -41,4 +43,9 @@ const theme = createTheme({
 const logoStyle = {
   height: 64,
   width: 64,
+};
+
+const appBarStyle = {
+  bottom: 0,
+  top: "auto",
 };
