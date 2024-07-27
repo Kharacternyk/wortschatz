@@ -2,14 +2,8 @@ import {
   KeyboardDoubleArrowLeft,
   KeyboardDoubleArrowRight,
 } from "@mui/icons-material";
-import {
-  Box,
-  IconButton,
-  Link,
-  SvgIcon,
-  Typography
-} from "@mui/material";
-import {useLocalStorage} from "../hooks/local-storage";
+import { Box, IconButton, Link, SvgIcon, Typography } from "@mui/material";
+import { useLocalStorage } from "../hooks/local-storage";
 import GitHubLogo from "../images/github.svg?react";
 
 export const Footer = () => {
@@ -23,6 +17,7 @@ export const Footer = () => {
           size="small"
           aria-label="mehr zeigen"
           onClick={() => setFooterState(footerStates.expanded)}
+          key={0}
         >
           <KeyboardDoubleArrowLeft />
         </IconButton>
@@ -47,6 +42,7 @@ export const Footer = () => {
         size="small"
         aria-label="weniger zeigen"
         onClick={() => setFooterState(footerStates.collapsed)}
+        key={0}
       >
         <KeyboardDoubleArrowRight />
       </IconButton>
