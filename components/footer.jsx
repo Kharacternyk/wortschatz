@@ -9,6 +9,7 @@ import {
   Link,
   SvgIcon,
   Toolbar,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import {useLocalStorage} from "../hooks/local-storage";
@@ -22,14 +23,16 @@ export const Footer = () => {
       <AppBar elevation={0} sx={appBarStyle}>
         <Toolbar variant="dense">
           <Box sx={spacerStyle} />
-          <IconButton
-            size="small"
-            aria-label="mehr zeigen"
-            onClick={() => setFooterState(footerStates.expanded)}
-            key={0}
-          >
-            <KeyboardDoubleArrowLeft />
-          </IconButton>
+          <Tooltip title="Mehr zeigen">
+            <IconButton
+              size="small"
+              aria-label="mehr zeigen"
+              onClick={() => setFooterState(footerStates.expanded)}
+              key={0}
+            >
+              <KeyboardDoubleArrowLeft />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
     );
@@ -50,14 +53,16 @@ export const Footer = () => {
         >
           <SvgIcon inheritViewBox component={GitHubLogo} />
         </IconButton>
-        <IconButton
-          size="small"
-          aria-label="weniger zeigen"
-          onClick={() => setFooterState(footerStates.collapsed)}
-          key={0}
-        >
-          <KeyboardDoubleArrowRight />
-        </IconButton>
+        <Tooltip title="Weniger zeigen">
+          <IconButton
+            size="small"
+            aria-label="weniger zeigen"
+            onClick={() => setFooterState(footerStates.collapsed)}
+            key={0}
+          >
+            <KeyboardDoubleArrowRight />
+          </IconButton>
+        </Tooltip>
       </Toolbar>
     </AppBar>
   );
