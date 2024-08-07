@@ -7,7 +7,7 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
-  Stack
+  Stack,
 } from "@mui/material";
 import {useState} from "react";
 import {usePrefetch} from "../hooks/prefetch.js";
@@ -53,11 +53,14 @@ export const Form = () => {
       <Stack direction="row" flexWrap="wrap" alignItems="center">
         <RadioGroup
           value={articleIndex}
-          onChange={makeListener(setArticleIndex)}
+          onChange={makeNumberListener(setArticleIndex)}
         >
           {articles.map(makeArticleRadio(articleIndex))}
         </RadioGroup>
-        <RadioGroup value={nounIndex} onChange={makeListener(setNounIndex)}>
+        <RadioGroup
+          value={nounIndex}
+          onChange={makeNumberListener(setNounIndex)}
+        >
           {germanNouns.map(makeNounRadio(nounIndex))}
         </RadioGroup>
       </Stack>
@@ -96,4 +99,5 @@ const articles = ["der", "die", "das"];
 
 const radio = <Radio />;
 
-const makeListener = (setter) => (event) => setter(event.target.value);
+const makeNumberListener = (setter) => (event) =>
+  setter(Number(event.target.value));
