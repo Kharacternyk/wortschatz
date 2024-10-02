@@ -1,4 +1,4 @@
-import {Cake, PedalBike, WbSunny} from "@mui/icons-material";
+import {Draw, PedalBike, WbSunny} from "@mui/icons-material";
 import {
   Alert,
   Button,
@@ -91,7 +91,7 @@ const makeRadio =
     );
   };
 
-const makeArticleRadio = makeRadio([<Cake />, <WbSunny />, <PedalBike />]);
+const makeArticleRadio = makeRadio([<Draw />, <WbSunny />, <PedalBike />]);
 
 const makeNounRadio = makeRadio();
 
