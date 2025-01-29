@@ -12,11 +12,17 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import {useCallback} from "react";
 import {useLocalStorage} from "../hooks/local-storage";
 import GitHubLogo from "../images/github.svg?react";
 
 export const Footer = () => {
   const [footerState, setFooterState] = useLocalStorage("footerState");
+  const expand = useCallback(() => setFooterState(footerStates.expanded), []);
+  const collapse = useCallback(
+    () => setFooterState(footerStates.collapsed),
+    []
+  );
 
   if (footerState === footerStates.collapsed) {
     return (
@@ -27,7 +33,7 @@ export const Footer = () => {
             <IconButton
               size="small"
               aria-label="mehr zeigen"
-              onClick={() => setFooterState(footerStates.expanded)}
+              onClick={expand}
               key={0}
             >
               <KeyboardDoubleArrowLeft />
@@ -57,7 +63,7 @@ export const Footer = () => {
           <IconButton
             size="small"
             aria-label="weniger zeigen"
-            onClick={() => setFooterState(footerStates.collapsed)}
+            onClick={collapse}
             key={0}
           >
             <KeyboardDoubleArrowRight />

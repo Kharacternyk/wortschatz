@@ -9,7 +9,7 @@ import {
   RadioGroup,
   Stack,
 } from "@mui/material";
-import {useState} from "react";
+import {useCallback, useMemo, useState} from "react";
 import {usePrefetch} from "../hooks/prefetch.js";
 import {Prompt} from "./prompt.jsx";
 
@@ -20,6 +20,24 @@ export const Form = () => {
   const [isVerified, setIsVerified] = useState(false);
   const quiz = usePrefetch("/nouns", [iterationCount]);
 
+  const toggleVerified = useCallback(() => {
+    if (isVerified) {
+      setIterationCount(iterationCount + 1);
+    }
+    setIsVerified(!isVerified);
+  }, [isVerified]);
+  const changeArticle = useCallback(makeNumberListener(setArticleIndex), []);
+  const changeNoun = useCallback(makeNumberListener(setNounIndex), []);
+
+  const articleRadios = useMemo(
+    () => articles.map(makeArticleRadio(articleIndex)),
+    [articleIndex]
+  );
+  const nounRadios = useMemo(
+    () => articles.map(makeArticleRadio(nounIndex)),
+    [nounIndex]
+  );
+
   if (quiz === null) {
     return <CircularProgress />;
   }
@@ -28,12 +46,6 @@ export const Form = () => {
     quiz.split("\t");
   const correctNoun = germanNouns[correctNounIndex];
 
-  const toggleVerified = () => {
-    if (isVerified) {
-      setIterationCount(iterationCount + 1);
-    }
-    setIsVerified(!isVerified);
-  };
   const [buttonText, buttonVariant] = isVerified
     ? ["Noch ein Mal", "text"]
     : ["Prüfen", "contained"];
@@ -51,17 +63,11 @@ export const Form = () => {
     <>
       <Prompt noun={englishNoun} />
       <Stack direction="row" flexWrap="wrap" alignItems="center">
-        <RadioGroup
-          value={articleIndex}
-          onChange={makeNumberListener(setArticleIndex)}
-        >
-          {articles.map(makeArticleRadio(articleIndex))}
+        <RadioGroup value={articleIndex} onChange={changeArticle}>
+          {articleRadios}
         </RadioGroup>
-        <RadioGroup
-          value={nounIndex}
-          onChange={makeNumberListener(setNounIndex)}
-        >
-          {germanNouns.map(makeNounRadio(nounIndex))}
+        <RadioGroup value={nounIndex} onChange={changeNoun}>
+          {nounRadios}
         </RadioGroup>
       </Stack>
       <Button variant={buttonVariant} onClick={toggleVerified}>
