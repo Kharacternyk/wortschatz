@@ -33,10 +33,6 @@ export const Form = () => {
     () => articles.map(makeArticleRadio(articleIndex)),
     [articleIndex]
   );
-  const nounRadios = useMemo(
-    () => articles.map(makeArticleRadio(nounIndex)),
-    [nounIndex]
-  );
 
   if (quiz === null) {
     return <CircularProgress />;
@@ -45,6 +41,7 @@ export const Form = () => {
   const [englishNoun, correctArticle, correctNounIndex, ...germanNouns] =
     quiz.split("\t");
   const correctNoun = germanNouns[correctNounIndex];
+  const nounRadios = germanNouns.map(makeNounRadio(nounIndex));
 
   const [buttonText, buttonVariant] = isVerified
     ? ["Noch ein Mal", "text"]
