@@ -1,11 +1,2 @@
-/*.js
-    cache-control: max-age=31536000, immutable
-
-/*.css
-    cache-control: max-age=31536000, immutable
-
-/*.woff
-    cache-control: max-age=31536000, immutable
-
-/*.woff2
+/assets/*
     cache-control: max-age=31536000, immutable
